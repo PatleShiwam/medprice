@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medicine Search</title>s
+</head>
+<body>
+  <div class="header">
+   
+    <img src="assets/logo.png" alt="Logo" class="logo">
+    <span class="title">Drug Information and Availability</span>
+    <div class="search-bar">
+      <input type="text" id="medicine-input" placeholder="Search for medicine..." [(ngModel)]="searchQuery"  (keyup.enter)="search()">
+      <button id="search-button" (click)="search()">Search</button>
+    </div>
+  </div>
+  <div class="overlay" *ngIf="medicineInfo === null">
+    <div class="overlay-content">
+      <div class="not-found-message">
+        The Medicine You are looking for is not available. Sorry!
+      </div>
+      <button class="close-button" (click)="dismissOverlay()">Close</button>
+    </div>
+  </div>
+  
+  <table class="table" *ngIf="medicineInfo.length > 0">
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of medicineInfo">
+        <td>Product NDC</td>
+        <td>{{ item.product_ndc }}</td>
+      </tr>
+      <tr *ngFor="let item of medicineInfo">
+        <td>Generic Name</td>
+        <td>{{ item.generic_name }}</td>
+      </tr>
+      <tr *ngFor="let item of medicineInfo">
+        <td>Labeler Name</td>
+        <td>{{ item.labeler_name }}</td>
+      </tr>
+      <tr *ngFor="let item of medicineInfo">
+        <td>Brand Name</td>
+        <td>{{ item.brand_name }}</td>
+      </tr>
+      <tr *ngFor="let item of medicineInfo">
+        <td>Active Ingredients</td>
+        <td>
+          <ul>
+            <li *ngFor="let ingredient of item.active_ingredients">
+              {{ ingredient.name }} - {{ ingredient.strength }}
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr *ngFor="let item of medicineInfo">
+        <td>Finished</td>
+        <td>{{ item.finished }}</td>
+      </tr>
+      <tr *ngFor="let item of medicineInfo">
+        <td>Packaging</td>
+        <td>
+          <ul>
+            <li *ngFor="let package of item.packaging">
+              {{ package.description }} (Package NDC: {{ package.package_ndc }})
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr *ngFor="let item of medicineInfo">
+        <td>Listing Expiration Date</td>
+        <td>{{ item.listing_expiration_date }}</td>
+      </tr>
+      <tr *ngFor="let item of medicineInfo">
+        <td>OpenFDA (Manufacturer)</td>
+        <td>
+          <ul>
+            <li *ngFor="let manufacturer of item.openfda.manufacturer_name">
+              {{ manufacturer }}
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr *ngFor="let item of medicineInfo">
+        <td>Marketing Category</td>
+        <td>{{ item.marketing_category }}</td>
+      </tr>
+      <tr *ngFor="let item of medicineInfo">
+        <td>Dosage Form</td>
+        <td>{{ item.dosage_form }}</td>
+      </tr>
+      <tr *ngFor="let item of medicineInfo">
+        <td>Application Number</td>
+        <td>{{ item.application_number }}</td>
+      </tr>
+      <tr *ngFor="let item of medicineInfo">
+        <td>Product Type</td>
+        <td>{{ item.product_type }}</td>
+      </tr>
+      <tr *ngFor="let item of medicineInfo">
+        <td>Route</td>
+        <td>{{ item.route.join(', ') }}</td>
+      </tr>
+      <tr *ngFor="let item of medicineInfo">
+        <td>Marketing Start Date</td>
+        <td>{{ item.marketing_start_date }}</td>
+      </tr>
+      <tr *ngFor="let item of medicineInfo">
+        <td>SPL ID</td>
+        <td>{{ item.spl_id }}</td>
+      </tr>
+      <tr *ngFor="let item of medicineInfo">
+        <td>Brand Name Base</td>
+        <td>{{ item.brand_name_base }}</td>
+      </tr>
+      <tr *ngFor="let item of medicineInfo">
+        <td>Pharm Class</td>
+        <td>
+          <ul>
+            <li *ngFor="let pharmClass of item.pharm_class">
+              {{ pharmClass }}
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  
+</body>
+</html>
